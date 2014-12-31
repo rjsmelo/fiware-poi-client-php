@@ -1,0 +1,11 @@
+HTTP/1.1 200 OK
+Date: Wed, 31 Dec 2014 16:01:20 GMT
+Server: Apache/2.4.7 (Ubuntu)
+X-Powered-By: PHP/5.5.9-1ubuntu4.5
+Access-Control-Allow-Origin: *
+Content-Length: 160
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: application/json
+
+{"pois":{"ae01d34a-d0c1-4134-9107-71814b4805af":{"fw_core":{"location":{"wgs84":{"latitude":1,"longitude":1}},"category":"test_poi","name":{"":"Test POI 1"}}}}}
