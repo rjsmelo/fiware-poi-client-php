@@ -1,0 +1,31 @@
+{
+    "name": "rjsmelo/fiware-poi-client",
+    "description": "PHP Client Library for POI Data Provider Open API Specification",
+    "keywords": ["fiware", "poi"],
+    "homepage": "http://github.com/rjsmelo/fiware-poi-client-php",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ricardo Melo",
+            "email": "rjsmelo@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "guzzlehttp/guzzle": "~5.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Rjsmelo\\Fiware\\Poi\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Rjsmelo\\Fiware\\Poi\\Tests\\": "tests/"
+        }
+    }
+}
