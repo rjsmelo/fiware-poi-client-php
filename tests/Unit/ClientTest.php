@@ -63,8 +63,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase {
 
         $radialQuery = new RadialQuery(1, 1, null, 'test_poi');
 
-        $pois = $client->radialSearch($radialQuery);
-        $this->assertInstanceOf('Rjsmelo\Fiware\Poi\Response\Pois', $pois);
+        $poiList = $client->radialSearch($radialQuery);
+        $this->assertInstanceOf('Rjsmelo\Fiware\Poi\Response\PoiList', $poiList);
 
         $query = $this->history->getLastRequest()->getQuery();
         $this->assertEquals(1, $query['lat']);

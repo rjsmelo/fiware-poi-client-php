@@ -5,7 +5,7 @@ namespace Rjsmelo\Fiware\Poi;
 use Rjsmelo\Fiware\Poi\Server\PoiServer;
 use Rjsmelo\Fiware\Poi\Query\RadialQuery;
 use Rjsmelo\Fiware\Poi\Response\Components;
-use Rjsmelo\Fiware\Poi\Response\Pois;
+use Rjsmelo\Fiware\Poi\Response\PoiList;
 
 class Client
 {
@@ -29,11 +29,11 @@ class Client
     /**
      * Return the data of POIs within a given distance from a given location
      * @param RadialQuery $query
-     * @return Pois
+     * @return PoiList
      */
     public function radialSearch(RadialQuery $query)
     {
         $pois = $this->server->radialSearch($query);
-        return new Pois($pois);
+        return new PoiList($pois);
     }
 } 
