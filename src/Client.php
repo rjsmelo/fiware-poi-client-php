@@ -4,6 +4,7 @@ namespace Rjsmelo\Fiware\Poi;
 
 use Rjsmelo\Fiware\Poi\Server\PoiServer;
 use Rjsmelo\Fiware\Poi\Query\RadialQuery;
+use Rjsmelo\Fiware\Poi\Query\BoundingBoxQuery;
 use Rjsmelo\Fiware\Poi\Response\Components;
 use Rjsmelo\Fiware\Poi\Response\PoiList;
 
@@ -34,6 +35,17 @@ class Client
     public function radialSearch(RadialQuery $query)
     {
         $pois = $this->server->radialSearch($query);
+        return new PoiList($pois);
+    }
+
+    /**
+     * Return the data of POIs within a given bounding box
+     * @param BoundingBoxQuery $query
+     * @return PoiList
+     */
+    public function BoundingBoxSearch(BoundingBoxQuery $query)
+    {
+        $pois = $this->server->BoundingBoxSearch($query);
         return new PoiList($pois);
     }
 } 

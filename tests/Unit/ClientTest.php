@@ -5,6 +5,7 @@ namespace Rjsmelo\Fiware\Poi\Test\Unit;
 use GuzzleHttp\Subscriber\History;
 use GuzzleHttp\Subscriber\Mock;
 use Rjsmelo\Fiware\Poi\Client;
+use Rjsmelo\Fiware\Poi\Query\BoundingBoxQuery;
 use Rjsmelo\Fiware\Poi\Server\PoiServer;
 use Rjsmelo\Fiware\Poi\Query\RadialQuery;
 
@@ -71,6 +72,29 @@ class ClientTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(1, $query['lon']);
         $this->assertEquals('test_poi', $query['category']);
         $this->assertFalse($query->hasKey('radius'));
+
+    }
+
+    /**
+     * @test
+     */
+    public function boundingBoxSearch()
+    {
+        $this->server->getEmitter()->attach($this->getGuzzleMockResponse('BoundingBoxSearch'));
+        $client = new Client($this->server);
+
+        $boundingBoxQuery = new BoundingBoxQuery(1, 0, 1, 0, 'test_poi');
+
+        $poiList = $client->BoundingBoxSearch($boundingBoxQuery);
+        $this->assertInstanceOf('Rjsmelo\Fiware\Poi\Response\PoiList', $poiList);
+
+        $query = $this->history->getLastRequest()->getQuery();
+        $this->assertEquals(1, $query['north']);
+        $this->assertEquals(0, $query['south']);
+        $this->assertEquals(1, $query['east']);
+        $this->assertEquals(0, $query['west']);
+        $this->assertEquals('test_poi', $query['category']);
+        $this->assertFalse($query->hasKey('maxResults'));
 
     }
 }

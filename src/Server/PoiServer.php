@@ -53,4 +53,36 @@ class PoiServer extends GuzzleHttpClient
 
         return json_decode($response->getBody());
     }
+
+    public function BoundingBoxSearch($query)
+    {
+        $mapping = [
+            'north' => 'north',
+            'south' => 'south',
+            'east' => 'east',
+            'west' => 'west',
+            'category' => 'category',
+            'component' => 'component',
+            'maxResults' => 'max_results',
+            'beginTime' => 'begin_time',
+            'endTime' => 'end_time',
+            'minMinutes' => 'min_minutes',
+        ];
+
+        $params = array();
+        foreach ($query->asArray() as $key => $value) {
+            if (!is_null($value)) {
+                $params[$mapping[$key]] = $value;
+            }
+        }
+
+        $response = $this->get(
+            'bbox_search',
+            [
+                'query' => $params
+            ]
+        );
+
+        return json_decode($response->getBody());
+    }
 }
