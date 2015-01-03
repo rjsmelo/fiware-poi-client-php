@@ -6,6 +6,7 @@ use GuzzleHttp\Subscriber\History;
 use GuzzleHttp\Subscriber\Mock;
 use Rjsmelo\Fiware\Poi\Client;
 use Rjsmelo\Fiware\Poi\Query\BoundingBoxQuery;
+use Rjsmelo\Fiware\Poi\Query\PoiListQuery;
 use Rjsmelo\Fiware\Poi\Server\PoiServer;
 use Rjsmelo\Fiware\Poi\Query\RadialQuery;
 
@@ -95,6 +96,26 @@ class ClientTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(0, $query['west']);
         $this->assertEquals('test_poi', $query['category']);
         $this->assertFalse($query->hasKey('maxResults'));
+
+    }
+
+    /**
+     * @test
+     */
+    public function poiListSearch()
+    {
+        $this->server->getEmitter()->attach($this->getGuzzleMockResponse('PoiListSearch'));
+        $client = new Client($this->server);
+
+        $poiListSearch = new PoiListQuery('ae01d34a-d0c1-4134-9107-71814b4805af', null, true);
+
+        $poiList = $client->getPoiList($poiListSearch);
+        $this->assertInstanceOf('Rjsmelo\Fiware\Poi\Response\PoiList', $poiList);
+
+        $query = $this->history->getLastRequest()->getQuery();
+        $this->assertEquals('ae01d34a-d0c1-4134-9107-71814b4805af', $query['poi_id']);
+        $this->assertEquals(true, $query['get_for_update']);
+        $this->assertFalse($query->hasKey('component'));
 
     }
 }

@@ -4,6 +4,7 @@ namespace Rjsmelo\Fiware\Poi\Server;
 
 use GuzzleHttp\Client as GuzzleHttpClient;
 use Rjsmelo\Fiware\Poi\Query\BoundingBoxQuery;
+use Rjsmelo\Fiware\Poi\Query\PoiListQuery;
 use Rjsmelo\Fiware\Poi\Query\RadialQuery;
 
 class PoiServer extends GuzzleHttpClient
@@ -69,6 +70,28 @@ class PoiServer extends GuzzleHttpClient
 
         $response = $this->get(
             'bbox_search',
+            [
+                'query' => $params
+            ]
+        );
+
+        return json_decode($response->getBody());
+    }
+
+    public function getPoiList(PoiListQuery $query)
+    {
+        $mapping = [
+            'poiIds' => 'poi_id',
+            'component' => 'component',
+            'forUpdate' => 'get_for_update',
+        ];
+
+        $params = $this->mapQueryParameters($query->asArray(), $mapping);
+
+        $params['poi_id'] = implode(',', $params['poi_id']);
+
+        $response = $this->get(
+            'get_pois',
             [
                 'query' => $params
             ]
