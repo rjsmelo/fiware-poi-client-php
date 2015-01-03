@@ -1,11 +1,10 @@
 <?php
-
 namespace Rjsmelo\Fiware\Poi\Test\Unit\Response;
 
 use Rjsmelo\Fiware\Poi\Response\Components;
 
-class ComponentsTest extends \PHPUnit_Framework_TestCase {
-
+class ComponentsTest extends \PHPUnit_Framework_TestCase
+{
     const ZERO_COMPONENTS = '{"components": []}';
     const MULTIPLE_COMPONENT = '{"components":["fw_core","fw_contact","fw_xml3d","fw_media","fw_time","fw_sensor","fw_marker","fw_relationships"]}';
 

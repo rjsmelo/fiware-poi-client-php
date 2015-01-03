@@ -1,5 +1,4 @@
 <?php
-
 namespace Rjsmelo\Fiware\Poi\Server;
 
 use GuzzleHttp\Client as GuzzleHttpClient;
@@ -22,6 +21,7 @@ class PoiServer extends GuzzleHttpClient
     public function getComponents()
     {
         $response = $this->get('get_components');
+
         return json_decode($response->getBody());
     }
 
@@ -108,6 +108,7 @@ class PoiServer extends GuzzleHttpClient
                 $params[$mapDefinition[$key]] = $value;
             }
         }
+
         return $params;
     }
 }

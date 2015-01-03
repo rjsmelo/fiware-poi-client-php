@@ -1,5 +1,4 @@
 <?php
-
 namespace Rjsmelo\Fiware\Poi\Query;
 
 class PoiListQuery
@@ -12,12 +11,14 @@ class PoiListQuery
     // Optional parameters:
 
     /**
-     * component=component - POI data component name(s) to be included to results. Several component names can be given by separating them with commas. If this parameter is not given, all components are included.
+     * component=component - POI data component name(s) to be included to results. Several component names can be given
+     * by separating them with commas. If this parameter is not given, all components are included.
      */
     private $component = null;
 
     /**
-     * get_for_update=true- The components requested are returned with all language and other variants and possible metadata for inspection and edit.
+     * get_for_update=true- The components requested are returned with all language and other variants and possible
+     * metadata for inspection and edit.
      */
     private $forUpdate = null;
 
@@ -26,9 +27,9 @@ class PoiListQuery
      *
      * The parameter $poiIds is mandatory, the rest are optional (default value is null)
      *
-     * @param (string|Array) $poiIds UUID of the POI
-     * @param null $component POI data component name(s) to be included to results
-     * @param null $forUpdate Request POI for update
+     * @param (string|Array) $poiIds    UUID of the POI
+     * @param null           $component POI data component name(s) to be included to results
+     * @param null           $forUpdate Request POI for update
      */
     public function __construct(
         $poiIds,
@@ -51,4 +52,4 @@ class PoiListQuery
             'forUpdate' => $this->forUpdate
         ];
     }
-} 
+}

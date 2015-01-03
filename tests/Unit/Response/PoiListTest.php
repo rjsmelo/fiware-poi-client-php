@@ -1,11 +1,10 @@
 <?php
-
 namespace Rjsmelo\Fiware\Poi\Test\Unit\Response;
 
 use Rjsmelo\Fiware\Poi\Response\PoiList;
 
-class PoiListTest extends \PHPUnit_Framework_TestCase {
-
+class PoiListTest extends \PHPUnit_Framework_TestCase
+{
     const SAMPLE = '{"pois":{"ae01d34a-d0c1-4134-9107-71814b4805af":{"fw_core":{"location":{"wgs84":{"latitude":1,"longitude":1}},"category":"test_poi","name":{"":"Test POI 1"}}}}}';
 
     /**

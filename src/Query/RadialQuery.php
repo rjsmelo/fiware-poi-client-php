@@ -1,5 +1,4 @@
 <?php
-
 namespace Rjsmelo\Fiware\Poi\Query;
 
 class RadialQuery
@@ -22,12 +21,14 @@ class RadialQuery
     private $radius = null;
 
     /**
-     * category=category - POI category/categories to be included to results. Several categories can be given by separating them with commas. If this parameter is not given, all categories are included.
+     * category=category - POI category/categories to be included to results. Several categories can be given by
+     * separating them with commas. If this parameter is not given, all categories are included.
      */
     private $category = null;
 
     /**
-     * component=component - POI data component name(s) to be included to results. Several component names can be given by separating them with commas. If this parameter is not given, all components are included.
+     * component=component - POI data component name(s) to be included to results. Several component names can be given
+     * by separating them with commas. If this parameter is not given, all components are included.
      */
     private $component = null;
 
@@ -47,7 +48,8 @@ class RadialQuery
     private $endTime = null;
 
     /**
-     * min_minutes=min_minutes - Minimum time of availability in minutes. Optional. If begin_time is defined, default: a short time > 0.
+     * min_minutes=min_minutes - Minimum time of availability in minutes. Optional.
+     * If begin_time is defined, default: a short time > 0.
      */
     private $minMinutes = null;
 
@@ -61,15 +63,15 @@ class RadialQuery
      *
      * [1] http://www.w3.org/TR/NOTE-datetime
      *
-     * @param $latitude Latitude of the center of the search circle [degrees]
-     * @param $longitude Longitude of the center of the search circle [degrees]
-     * @param null $radius Radius of the search circle [meters], default is implementation dependent
-     * @param null $category POI category/categories to be included to results
-     * @param null $component POI data component name(s) to be included to results
-     * @param null $maxResults Maximum number of POIs returned
-     * @param null $beginTime When time of interest begins
-     * @param null $endTime When time of interest ends
-     * @param null $minMinutes Minimum time of availability in minutes
+     * @param float $latitude   Latitude of the center of the search circle [degrees]
+     * @param float $longitude  Longitude of the center of the search circle [degrees]
+     * @param null  $radius     Radius of the search circle [meters], default is implementation dependent
+     * @param null  $category   POI category/categories to be included to results
+     * @param null  $component  POI data component name(s) to be included to results
+     * @param null  $maxResults Maximum number of POIs returned
+     * @param null  $beginTime  When time of interest begins
+     * @param null  $endTime    When time of interest ends
+     * @param null  $minMinutes Minimum time of availability in minutes
      */
     public function __construct(
         $latitude,
@@ -107,4 +109,4 @@ class RadialQuery
             'minMinutes' => $this->minMinutes,
         ];
     }
-} 
+}

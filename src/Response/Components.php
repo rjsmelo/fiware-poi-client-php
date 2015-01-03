@@ -1,5 +1,4 @@
 <?php
-
 namespace Rjsmelo\Fiware\Poi\Response;
 
 class Components
@@ -18,6 +17,7 @@ class Components
         if (array_key_exists($componentName, $this->components)) {
             return true;
         }
+
         return false;
     }
-} 
+}

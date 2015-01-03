@@ -1,5 +1,4 @@
 <?php
-
 namespace Rjsmelo\Fiware\Poi\Test\Unit;
 
 use GuzzleHttp\Subscriber\History;
@@ -10,8 +9,8 @@ use Rjsmelo\Fiware\Poi\Query\PoiListQuery;
 use Rjsmelo\Fiware\Poi\Server\PoiServer;
 use Rjsmelo\Fiware\Poi\Query\RadialQuery;
 
-class ClientTest extends \PHPUnit_Framework_TestCase {
-
+class ClientTest extends \PHPUnit_Framework_TestCase
+{
     /**
      * @var PoiServer
      */
@@ -35,7 +34,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase {
      */
     private function getGuzzleMockResponse($filename)
     {
-        $realFile = __DIR__ . DIRECTORY_SEPARATOR . 'Mock' . DIRECTORY_SEPARATOR . $filename;
+        $realFile = __DIR__.DIRECTORY_SEPARATOR.'Mock'.DIRECTORY_SEPARATOR.$filename;
         $content = file_get_contents($realFile);
 
         $mock = new Mock([$content]);
@@ -73,7 +72,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(1, $query['lon']);
         $this->assertEquals('test_poi', $query['category']);
         $this->assertFalse($query->hasKey('radius'));
-
     }
 
     /**
@@ -96,7 +94,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(0, $query['west']);
         $this->assertEquals('test_poi', $query['category']);
         $this->assertFalse($query->hasKey('maxResults'));
-
     }
 
     /**
@@ -116,6 +113,5 @@ class ClientTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('ae01d34a-d0c1-4134-9107-71814b4805af', $query['poi_id']);
         $this->assertEquals(true, $query['get_for_update']);
         $this->assertFalse($query->hasKey('component'));
-
     }
 }

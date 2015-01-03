@@ -1,5 +1,4 @@
 <?php
-
 namespace Rjsmelo\Fiware\Poi;
 
 use Rjsmelo\Fiware\Poi\Server\PoiServer;
@@ -25,39 +24,43 @@ class Client
     public function getComponents()
     {
         $components = $this->server->getComponents();
+
         return new Components($components);
     }
 
     /**
      * Return the data of POIs within a given distance from a given location
-     * @param RadialQuery $query
+     * @param  RadialQuery $query
      * @return PoiList
      */
     public function radialSearch(RadialQuery $query)
     {
         $pois = $this->server->radialSearch($query);
+
         return new PoiList($pois);
     }
 
     /**
      * Return the data of POIs within a given bounding box
-     * @param BoundingBoxQuery $query
+     * @param  BoundingBoxQuery $query
      * @return PoiList
      */
     public function boundingBoxSearch(BoundingBoxQuery $query)
     {
         $pois = $this->server->boundingBoxSearch($query);
+
         return new PoiList($pois);
     }
 
     /**
      * Return the data of POIs listed in the query
-     * @param PoiListQuery $query
+     * @param  PoiListQuery $query
      * @return PoiList
      */
     public function getPoiList(PoiListQuery $query)
     {
         $pois = $this->server->getPoiList($query);
+
         return new PoiList($pois);
     }
-} 
+}

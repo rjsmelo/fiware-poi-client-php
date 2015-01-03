@@ -1,5 +1,4 @@
 <?php
-
 namespace Rjsmelo\Fiware\Poi\Response;
 
 class PoiList
@@ -17,4 +16,4 @@ class PoiList
     {
         return json_decode(json_encode($this->poiList), true);
     }
-} 
+}
