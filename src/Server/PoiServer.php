@@ -3,6 +3,7 @@
 namespace Rjsmelo\Fiware\Poi\Server;
 
 use GuzzleHttp\Client as GuzzleHttpClient;
+use Rjsmelo\Fiware\Poi\Query\BoundingBoxQuery;
 use Rjsmelo\Fiware\Poi\Query\RadialQuery;
 
 class PoiServer extends GuzzleHttpClient
@@ -37,12 +38,7 @@ class PoiServer extends GuzzleHttpClient
             'minMinutes' => 'min_minutes',
         ];
 
-        $params = array();
-        foreach ($query->asArray() as $key => $value) {
-            if (!is_null($value)) {
-                $params[$mapping[$key]] = $value;
-            }
-        }
+        $params = $this->mapQueryParameters($query->asArray(), $mapping);
 
         $response = $this->get(
             'radial_search',
@@ -54,7 +50,7 @@ class PoiServer extends GuzzleHttpClient
         return json_decode($response->getBody());
     }
 
-    public function boundingBoxSearch($query)
+    public function boundingBoxSearch(BoundingBoxQuery $query)
     {
         $mapping = [
             'north' => 'north',
@@ -69,12 +65,7 @@ class PoiServer extends GuzzleHttpClient
             'minMinutes' => 'min_minutes',
         ];
 
-        $params = array();
-        foreach ($query->asArray() as $key => $value) {
-            if (!is_null($value)) {
-                $params[$mapping[$key]] = $value;
-            }
-        }
+        $params = $this->mapQueryParameters($query->asArray(), $mapping);
 
         $response = $this->get(
             'bbox_search',
@@ -84,5 +75,16 @@ class PoiServer extends GuzzleHttpClient
         );
 
         return json_decode($response->getBody());
+    }
+
+    protected function mapQueryParameters(Array $query, Array $mapDefinition)
+    {
+        $params = array();
+        foreach ($query as $key => $value) {
+            if (!is_null($value) && array_key_exists($key, $mapDefinition)) {
+                $params[$mapDefinition[$key]] = $value;
+            }
+        }
+        return $params;
     }
 }
