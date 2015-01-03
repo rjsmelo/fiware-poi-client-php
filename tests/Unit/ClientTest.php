@@ -85,7 +85,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase {
 
         $boundingBoxQuery = new BoundingBoxQuery(1, 0, 1, 0, 'test_poi');
 
-        $poiList = $client->BoundingBoxSearch($boundingBoxQuery);
+        $poiList = $client->boundingBoxSearch($boundingBoxQuery);
         $this->assertInstanceOf('Rjsmelo\Fiware\Poi\Response\PoiList', $poiList);
 
         $query = $this->history->getLastRequest()->getQuery();

@@ -54,7 +54,7 @@ class PoiServer extends GuzzleHttpClient
         return json_decode($response->getBody());
     }
 
-    public function BoundingBoxSearch($query)
+    public function boundingBoxSearch($query)
     {
         $mapping = [
             'north' => 'north',

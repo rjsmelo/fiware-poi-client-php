@@ -43,9 +43,9 @@ class Client
      * @param BoundingBoxQuery $query
      * @return PoiList
      */
-    public function BoundingBoxSearch(BoundingBoxQuery $query)
+    public function boundingBoxSearch(BoundingBoxQuery $query)
     {
-        $pois = $this->server->BoundingBoxSearch($query);
+        $pois = $this->server->boundingBoxSearch($query);
         return new PoiList($pois);
     }
 } 
