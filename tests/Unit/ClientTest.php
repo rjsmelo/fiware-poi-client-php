@@ -114,4 +114,20 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(true, $query['get_for_update']);
         $this->assertFalse($query->hasKey('component'));
     }
+
+    /**
+     * @test
+     */
+    public function deletePoi()
+    {
+        $poiId = 'ae01d34a-d0c1-4134-9107-71814b4805af';
+
+        $this->server->getEmitter()->attach($this->getGuzzleMockResponse('DeletePoi'));
+        $client = new Client($this->server);
+
+        $client->deletePoi($poiId);
+
+        $query = $this->history->getLastRequest()->getQuery();
+        $this->assertEquals($poiId, $query['poi_id']);
+    }
 }

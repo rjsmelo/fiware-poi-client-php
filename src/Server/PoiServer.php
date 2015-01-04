@@ -100,6 +100,16 @@ class PoiServer extends GuzzleHttpClient
         return json_decode($response->getBody());
     }
 
+    public function deletePoi($poiId)
+    {
+        $response = $this->delete(
+            'delete_poi',
+            [
+                'query' => ['poi_id' => $poiId]
+            ]
+        );
+    }
+
     protected function mapQueryParameters(Array $query, Array $mapDefinition)
     {
         $params = array();

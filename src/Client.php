@@ -63,4 +63,13 @@ class Client
 
         return new PoiList($pois);
     }
+
+    /**
+     * Delete existing POI
+     * @param string $poiId
+     */
+    public function deletePoi($poiId)
+    {
+        $this->server->deletePoi($poiId);
+    }
 }
