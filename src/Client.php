@@ -1,6 +1,7 @@
 <?php
 namespace Rjsmelo\Fiware\Poi;
 
+use Rjsmelo\Fiware\Poi\Entity\Poi;
 use Rjsmelo\Fiware\Poi\Server\PoiServer;
 use Rjsmelo\Fiware\Poi\Query\RadialQuery;
 use Rjsmelo\Fiware\Poi\Query\BoundingBoxQuery;
@@ -71,5 +72,12 @@ class Client
     public function deletePoi($poiId)
     {
         $this->server->deletePoi($poiId);
+    }
+
+    public function addPoi(Poi $poi)
+    {
+        $response = $this->server->addPoi($poi);
+
+        return $response;
     }
 }

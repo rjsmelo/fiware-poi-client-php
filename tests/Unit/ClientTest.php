@@ -4,6 +4,7 @@ namespace Rjsmelo\Fiware\Poi\Test\Unit;
 use GuzzleHttp\Subscriber\History;
 use GuzzleHttp\Subscriber\Mock;
 use Rjsmelo\Fiware\Poi\Client;
+use Rjsmelo\Fiware\Poi\Entity\Poi;
 use Rjsmelo\Fiware\Poi\Query\BoundingBoxQuery;
 use Rjsmelo\Fiware\Poi\Query\PoiListQuery;
 use Rjsmelo\Fiware\Poi\Server\PoiServer;
@@ -129,5 +130,23 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $query = $this->history->getLastRequest()->getQuery();
         $this->assertEquals($poiId, $query['poi_id']);
+    }
+
+    /**
+     * @test
+     */
+    public function addPoi()
+    {
+        $data = '{"fw_core":{"location":{"wgs84":{"latitude":3,"longitude":1}},"category":"test_poi","name":{"":"Test POI 1"}}}';
+        $poi = new Poi(null, json_decode($data, true));
+
+        $this->server->getEmitter()->attach($this->getGuzzleMockResponse('AddPoi'));
+        $client = new Client($this->server);
+
+        $client->addPoi($poi);
+
+        $request = $this->history->getLastRequest();
+
+        $this->assertJsonStringEqualsJsonString($data, $request->getBody()->__toString());
     }
 }
