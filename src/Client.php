@@ -85,4 +85,13 @@ class Client
 
         return $response;
     }
+
+    /**
+     * Update a Poi
+     * @param Poi $poi
+     */
+    public function updatePoi(Poi $poi)
+    {
+        $this->server->updatePoi($poi);
+    }
 }

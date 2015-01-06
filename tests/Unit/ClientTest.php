@@ -149,4 +149,24 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $this->assertJsonStringEqualsJsonString($data, $request->getBody()->__toString());
     }
+
+    /**
+     * @test
+     */
+    public function updatePoi()
+    {
+        $poiId = 'ae01d34a-d0c1-4134-9107-71814b4805af';
+        $data = '{"fw_core":{"location":{"wgs84":{"latitude":1,"longitude":1}},"last_update":{"timestamp":1390985438,"responsible": "28509ff0-8294-11e3-baa7-0800200c9a66"},"category":"test_poi","name":{"":"Test POI 1"}}}';
+
+        $poi = new Poi($poiId, json_decode($data, true));
+
+        $this->server->getEmitter()->attach($this->getGuzzleMockResponse('UpdatePoi'));
+        $client = new Client($this->server);
+
+        $client->updatePoi($poi);
+
+        $request = $this->history->getLastRequest();
+
+        $this->assertJsonStringEqualsJsonString(json_encode([$poiId => json_decode($data, true)]), $request->getBody()->__toString());
+    }
 }

@@ -123,6 +123,18 @@ class PoiServer extends GuzzleHttpClient
         return json_decode($response->getBody());
     }
 
+    public function updatePoi(Poi $poi)
+    {
+        $response = $this->post(
+            'add_poi',
+            [
+                'json' => [$poi->getId() => $poi->asArray()]
+            ]
+        );
+
+        return json_decode($response->getBody());
+    }
+
     protected function mapQueryParameters(Array $query, Array $mapDefinition)
     {
         $params = array();
