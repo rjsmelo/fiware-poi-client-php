@@ -74,6 +74,11 @@ class Client
         $this->server->deletePoi($poiId);
     }
 
+    /**
+     * Add a new POI
+     * @param  Poi   $poi
+     * @return mixed
+     */
     public function addPoi(Poi $poi)
     {
         $response = $this->server->addPoi($poi);
