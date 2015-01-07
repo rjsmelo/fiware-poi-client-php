@@ -1,0 +1,12 @@
+HTTP/1.0 500 Internal Server Error
+Date: Wed, 07 Jan 2015 19:40:04 GMT
+Server: Apache/2.4.7 (Ubuntu)
+X-Powered-By: PHP/5.5.9-1ubuntu4.5
+Access-Control-Allow-Origin: *
+Content-Length: 183
+Connection: close
+Content-Type: text/html
+
+ERROR:  invalid input syntax for uuid: ""
+LINE 1: ...e, source_id, source_licence FROM fw_core WHERE uuid IN ('')
+                                                                    ^

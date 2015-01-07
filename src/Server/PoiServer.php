@@ -2,7 +2,11 @@
 namespace Rjsmelo\Fiware\Poi\Server;
 
 use GuzzleHttp\Client as GuzzleHttpClient;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
 use Rjsmelo\Fiware\Poi\Entity\Poi;
+use Rjsmelo\Fiware\Poi\Exception\BadRequest;
+use Rjsmelo\Fiware\Poi\Exception\ServerError;
 use Rjsmelo\Fiware\Poi\Query\BoundingBoxQuery;
 use Rjsmelo\Fiware\Poi\Query\PoiListQuery;
 use Rjsmelo\Fiware\Poi\Query\RadialQuery;
@@ -21,7 +25,7 @@ class PoiServer extends GuzzleHttpClient
 
     public function getComponents()
     {
-        $response = $this->get('get_components');
+        $response = $this->innerRequest('GET', 'get_components');
 
         return json_decode($response->getBody());
     }
@@ -42,7 +46,8 @@ class PoiServer extends GuzzleHttpClient
 
         $params = $this->mapQueryParameters($query->asArray(), $mapping);
 
-        $response = $this->get(
+        $response = $this->innerRequest(
+            'GET',
             'radial_search',
             [
                 'query' => $params
@@ -69,7 +74,8 @@ class PoiServer extends GuzzleHttpClient
 
         $params = $this->mapQueryParameters($query->asArray(), $mapping);
 
-        $response = $this->get(
+        $response = $this->innerRequest(
+            'GET',
             'bbox_search',
             [
                 'query' => $params
@@ -91,7 +97,8 @@ class PoiServer extends GuzzleHttpClient
 
         $params['poi_id'] = implode(',', $params['poi_id']);
 
-        $response = $this->get(
+        $response = $this->innerRequest(
+            'GET',
             'get_pois',
             [
                 'query' => $params
@@ -103,7 +110,8 @@ class PoiServer extends GuzzleHttpClient
 
     public function deletePoi($poiId)
     {
-        $response = $this->delete(
+        $response = $this->innerRequest(
+            'DELETE',
             'delete_poi',
             [
                 'query' => ['poi_id' => $poiId]
@@ -113,7 +121,8 @@ class PoiServer extends GuzzleHttpClient
 
     public function addPoi(Poi $poi)
     {
-        $response = $this->post(
+        $response = $this->innerRequest(
+            'POST',
             'add_poi',
             [
                 'json' => $poi->asArray()
@@ -125,7 +134,8 @@ class PoiServer extends GuzzleHttpClient
 
     public function updatePoi(Poi $poi)
     {
-        $response = $this->post(
+        $response = $this->innerRequest(
+            'POST',
             'add_poi',
             [
                 'json' => [$poi->getId() => $poi->asArray()]
@@ -145,5 +155,19 @@ class PoiServer extends GuzzleHttpClient
         }
 
         return $params;
+    }
+
+    protected function innerRequest($operation, $uri, $options = [])
+    {
+        try {
+            $request = $this->createRequest($operation, $uri, $options);
+            $response = $this->send($request);
+
+            return $response;
+        } catch (ClientException $e) {
+            throw new BadRequest($e->getResponse()->getBody()->__toString(), 400);
+        } catch (ServerException $e) {
+            throw new ServerError($e->getResponse()->getBody()->__toString(), 500);
+        }
     }
 }

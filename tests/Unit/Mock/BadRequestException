@@ -1,0 +1,12 @@
+HTTP/1.0 400 Bad Request
+Date: Wed, 07 Jan 2015 20:59:30 GMT
+Server: Apache/2.4.7 (Ubuntu)
+X-Powered-By: PHP/5.5.9-1ubuntu4.5
+Access-Control-Allow-Origin: *
+Content-Length: 122
+Connection: close
+Content-Type: text/html
+
+JSON does not validate. Violations:
+[fw_core.last_update] the property responsible is required
+POI data validation failed!

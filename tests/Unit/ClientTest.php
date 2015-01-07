@@ -169,4 +169,33 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $this->assertJsonStringEqualsJsonString(json_encode([$poiId => json_decode($data, true)]), $request->getBody()->__toString());
     }
+
+    /**
+     * @test
+     * @expectedException Rjsmelo\Fiware\Poi\Exception\ServerError
+     */
+    public function serverErrorException()
+    {
+        $this->server->getEmitter()->attach($this->getGuzzleMockResponse('ServerErrorException'));
+        $client = new Client($this->server);
+
+        $client->getPoiList(new PoiListQuery(''));
+    }
+
+    /**
+     * @test
+     * @expectedException Rjsmelo\Fiware\Poi\Exception\BadRequest
+     */
+    public function badRequestException()
+    {
+        $poiId = 'ae01d34a-d0c1-4134-9107-71814b4805af';
+        $data = '{"ae01d34a-d0c1-4134-9107-71814b4805af":{"fw_core":{"location":{"wgs84":{"latitude":1,"longitude":1}},"last_update":{"timestamp":1390985438},"category":"test_poi","name":{"":"Test POI 1"}}}}';
+
+        $poi = new Poi($poiId, json_decode($data, true));
+
+        $this->server->getEmitter()->attach($this->getGuzzleMockResponse('BadRequestException'));
+        $client = new Client($this->server);
+
+        $client->updatePoi($poi);
+    }
 }
