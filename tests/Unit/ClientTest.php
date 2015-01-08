@@ -1,19 +1,19 @@
 <?php
 namespace Rjsmelo\Fiware\Poi\Test\Unit;
 
+use GuzzleHttp\Client as GuzzleHttpClient;
 use GuzzleHttp\Subscriber\History;
 use GuzzleHttp\Subscriber\Mock;
 use Rjsmelo\Fiware\Poi\Client;
 use Rjsmelo\Fiware\Poi\Entity\Poi;
 use Rjsmelo\Fiware\Poi\Query\BoundingBoxQuery;
 use Rjsmelo\Fiware\Poi\Query\PoiListQuery;
-use Rjsmelo\Fiware\Poi\Server\PoiServer;
 use Rjsmelo\Fiware\Poi\Query\RadialQuery;
 
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var PoiServer
+     * @var GuzzleHttp\Client
      */
     private $server;
 
@@ -24,7 +24,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->server = new PoiServer("http://localhost:8080");
+        $this->server = new GuzzleHttpClient(['base_url' => 'http://localhost:8080']);
         $this->history = new History();
         $this->server->getEmitter()->attach($this->history);
     }
