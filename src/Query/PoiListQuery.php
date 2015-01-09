@@ -1,6 +1,9 @@
 <?php
 namespace Rjsmelo\Fiware\Poi\Query;
 
+/**
+ * Used to define the Query by one or more Ids
+ */
 class PoiListQuery
 {
     /**
