@@ -30,4 +30,21 @@ class PoiTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($uid, $poi->getId());
         $this->assertJsonStringEqualsJsonString($data, json_encode($poi->asArray()));
     }
+
+    /**
+     * @test
+     */
+    public function checkForComponents()
+    {
+        $uid = 'ae01d34a-d0c1-4134-9107-71814b4805af';
+        $data = '{"fw_core":{"location":{"wgs84":{"latitude":1,"longitude":1}},"last_update":{"timestamp":1390985438},"category":"test_poi","name":{"":"Test POI 1"}}}';
+
+        $poi = new Poi($uid, json_decode($data, true));
+
+        $components = $poi->components();
+
+        $this->assertTrue(is_array($components));
+        $this->assertCount(1, $components);
+        $this->assertEquals('fw_core', $components[0]);
+    }
 }

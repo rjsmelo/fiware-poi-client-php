@@ -25,4 +25,14 @@ class Poi
 
         return $this->components;
     }
+
+    public function components()
+    {
+        $components = [];
+        foreach ($this->components as $key => $value) {
+            $components[] = $key;
+        }
+
+        return $components;
+    }
 }
