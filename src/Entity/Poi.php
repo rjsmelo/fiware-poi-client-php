@@ -35,4 +35,13 @@ class Poi
 
         return $components;
     }
+
+    public function has($component)
+    {
+        if (array_key_exists($component, $this->components)) {
+            return true;
+        }
+
+        return false;
+    }
 }
