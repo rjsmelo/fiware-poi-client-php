@@ -44,4 +44,13 @@ class Poi
 
         return false;
     }
+
+    public function get($component)
+    {
+        if (!$this->has($component)) {
+            return false;
+        }
+
+        return $this->components[$component];
+    }
 }
