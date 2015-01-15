@@ -69,4 +69,14 @@ class PoiTest extends \PHPUnit_Framework_TestCase
         $component = $this->poi->get('fw_core');
         $this->assertJsonStringEqualsJsonString(json_encode(json_decode($this->data, true)['fw_core']), json_encode($component));
     }
+
+    /**
+     * @test
+     */
+    public function deleteComponent()
+    {
+        $this->assertTrue($this->poi->has('fw_core'));
+        $this->poi->delete('fw_core');
+        $this->assertFalse($this->poi->has('fw_core'));
+    }
 }

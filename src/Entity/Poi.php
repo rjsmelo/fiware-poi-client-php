@@ -53,4 +53,13 @@ class Poi
 
         return $this->components[$component];
     }
+
+    public function delete($component)
+    {
+        if (!$this->has($component)) {
+            return false;
+        }
+
+        unset($this->components[$component]);
+    }
 }
