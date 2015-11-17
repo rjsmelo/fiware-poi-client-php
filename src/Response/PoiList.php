@@ -23,6 +23,6 @@ class PoiList
             $poiList[$poi->getId()] = $poi->asArray();
         }
 
-        return json_decode(json_encode($this->poiList), true);
+        return $poiList;
     }
 }

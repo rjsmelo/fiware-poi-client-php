@@ -42,6 +42,17 @@ class PoiTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function createPoiFromObject()
+    {
+        $poi = new Poi($this->uid, json_decode($this->data));
+
+        $this->assertTrue(is_array($poi->asArray()));
+        $this->assertCount(1, $poi->asArray());
+    }
+
+    /**
+     * @test
+     */
     public function getComponents()
     {
         $components = $this->poi->components();
